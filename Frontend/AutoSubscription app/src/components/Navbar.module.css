@@ -1,0 +1,22 @@
+.navbar {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.default {
+    text-decoration: none;
+}
+
+.default:hover {
+    text-decoration: none;
+}
+
+.active {
+   text-decoration: underline;
+   text-decoration-color: white;
+   
+}
+
+.active:hover {
+    text-decoration-color: white;
+}
+

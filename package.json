@@ -1,0 +1,16 @@
+{
+  "name": "autosubscription-app",
+  "version": "1.0.0",
+  "description": "Web app which automates subscriptions for football clubs",
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "if-env TYPE=server && (cd server && npm install) || (cd client && npm install))",
+    "start": "node ./server/server.js",
+    "client": "cd client && npm start"
+  },
+  "keywords": [],
+  "dependencies": {
+    "if-env": "^1.0.4"
+  }
+}
