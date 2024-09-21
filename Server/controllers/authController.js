@@ -60,7 +60,7 @@ const userSignUp = async(req,res) => {
 
       const token = generateToken(existingUser.rows[0]);
 
-      res.json( { user: existingUser.rows , token })
+      return res.json( { user: existingUser.rows , token })
 
       
    

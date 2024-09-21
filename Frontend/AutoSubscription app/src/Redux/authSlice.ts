@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "../interfaces/interfaces";
+
 
 import { SignUpFormData, LoginFormData } from "../interfaces/interfaces";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -45,7 +45,7 @@ export const userSignUp = createAsyncThunk<AuthResponse, SignUpFormData>("auth/s
     }
 });
 
-export const userLogin = createAsyncThunk<AuthResponse, LoginFormData>("auth/login", async(formData,thunkAPI) => {
+export const userLogin = createAsyncThunk<AuthResponse, any>("auth/login", async(formData,thunkAPI) => {
     try {
         const response = await fetch("http://localhost:3050/api/login", {
             method: "POST",
@@ -54,7 +54,8 @@ export const userLogin = createAsyncThunk<AuthResponse, LoginFormData>("auth/log
        });
    
        const data = await response.json();
-       return { user: data.user, token: data.token };
+       console.log(data);
+       return data;
     } 
     catch (error){
         return thunkAPI.rejectWithValue(error);
@@ -84,7 +85,13 @@ export const authSlice = createSlice({
             state.isLoading = false;
             const errorPayload = action.payload as ErrorPayload;
             state.error = errorPayload?.message || action.error.message || 'Failed to sign up';
-          });
+          })
+        .addCase(userLogin.fulfilled, (state, action: PayloadAction<{ user: any, token: string }>) => {
+            state.isLoading = false;
+            state.token = action.payload.token
+            state.user = action.payload.user
+
+        })
     },
 
 });

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoginFormData } from "../interfaces/interfaces";
 import { ChangeEvent } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../Redux/store";
 import { userLogin } from "../Redux/authSlice";
 import style from "./Login.module.css";
@@ -9,11 +9,12 @@ import style from "./Login.module.css";
 export default function Login() {
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
 
-    const [loginData, setLoginData] = useState<LoginFormData>({
-        email: "",
-        password: ""
+    const [loginData, setLoginData] = useState({
+        user_email: "",
+        hashed_password: ""
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -30,6 +31,7 @@ export default function Login() {
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(userLogin(loginData));
+        navigate('/home');
         console.log(loginData); 
     };
 
@@ -48,8 +50,8 @@ export default function Login() {
                         <label className={style.label}>Email:</label>
                         <input className={style.input}
                             type="email"
-                            name="email"
-                            value={loginData.email}
+                            name="user_email"
+                            value={loginData.user_email}
                             onChange={handleChange}
                             required
                         />
@@ -59,8 +61,8 @@ export default function Login() {
                         <label className={style.label}>Password:</label>
                         <input className={style.input}
                             type="password"
-                            name="password"
-                            value={loginData.password}
+                            name="hashed_password"
+                            value={loginData.hashed_password}
                             onChange={handleChange}
                             required
                         />
