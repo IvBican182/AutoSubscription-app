@@ -1,49 +1,25 @@
 import {  useSelector } from "react-redux";
-import { useAppDispatch } from "../Redux/store";
 import { RootState } from "../Redux/store";
-import { fetchUsers } from "../Redux/userSlice";
-import { useEffect } from "react";
+import AdminHomepage from "../components/AdminHomepage";
+import UserHomepage from "../components/UserHomepage";
+
 
 export default function Homepage() {
-    const dispatch = useAppDispatch();
-
-    const users = useSelector((state: RootState) => state.users.users )
     
-    function fetch() {
-        dispatch(fetchUsers());
-    }
 
-    useEffect(() => {
-        fetch();
-        console.log(users);
-    }, []);
-
+    const user = useSelector((state: RootState) => state.auth.user );
+    console.log(user);
+    
+    
+    if (!user) {
+        return <p>Loading...</p>; // or redirect to login
+      }
     
     
 
     return (
         <div className="container">
-        <div className="total-budget">
-            <div className="sum">
-                <span>Amount of money from transactions</span>
-                <button>Transaction details</button> 
-            </div>
-        </div>
-        <div>
-            <button>Create new transaction</button>
-            <button>Create new subscription</button>
-        </div>
-        <div>
-            <button>View current transactions</button>
-            <button>View current subscriptions</button>
-        </div>
-        <div>
-            <p>users:</p>
-            <ul>{users.map((user: any) => {
-            return <li key={user.id}>{user.first_name}</li>
-             })}
-            </ul>
-        </div>
+            {user.role_id === 1 ? <AdminHomepage /> : <UserHomepage />}
         </div>
     )
 

@@ -1,9 +1,15 @@
-import { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import { RootState } from "../Redux/store";
+import { useDispatch } from "react-redux";
+import { logout } from "../Redux/authSlice";
+
 
 export default function Navbar() {
-    const [isLogged, setIsLogged] = useState(true);
+    const dispatch = useDispatch();
+    const isToken = useSelector((state: RootState) => state.auth.token);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark px-2">
@@ -14,7 +20,7 @@ export default function Navbar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-                {isLogged && (
+                {isToken && (
                         <>
                             <li className="nav-item active">
                                 <NavLink to ="/home" className="homepage">HOME <span className="sr-only">(current)</span></NavLink>
@@ -25,13 +31,13 @@ export default function Navbar() {
                             </li>
                             {/* Sign Out Link - Visible only when logged in */}
                             <li className="nav-item">
-                                <NavLink to="/login" className="auth"><span className="nav-link">Sign Out</span></NavLink>
+                                <NavLink to="/login" className="auth"><button onClick={() => dispatch(logout())} className="nav-link">Sign Out</button></NavLink>
                             </li>
                         </>
                     )}
 
                     {/* Sign In Link - Visible only when not logged in */}
-                    {!isLogged && (
+                    {!isToken && (
                         <>
                             <li className="nav-item">
                                 <NavLink to="/login" className="auth"><span className="nav-link">Sign In</span></NavLink>

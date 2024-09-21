@@ -3,12 +3,15 @@ import { ChangeEvent } from "react";
 import { SignUpFormData } from "../interfaces/interfaces"; 
 import { useAppDispatch } from "../Redux/store";
 import { userSignUp } from "../Redux/authSlice";
+import { useNavigate } from 'react-router-dom';
 import style from "./SignUp.module.css"
 
 
 export default function SignUp() {
 
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<SignUpFormData>({
         first_name: '',
@@ -41,6 +44,7 @@ export default function SignUp() {
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(userSignUp(parsedFormData));
+        navigate('/home');
         console.log(formData); 
     };
 
