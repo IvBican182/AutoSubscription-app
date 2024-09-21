@@ -1,8 +1,20 @@
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 3050;
 
 const express = require("express");
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const authRoutes = require('./routes/authRoute.js');
+const userRoutes = require("./routes/userRoute.js");
+
+
+
+
 const app = express();
 const pool = require("./db.js");
+
+app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/juniors", async (req,res) => {
     try {
@@ -15,5 +27,10 @@ app.get("/juniors", async (req,res) => {
         res.status(500).json({ error: "Failed to fetch groups" });
     }
 });
+
+app.use("/api", authRoutes);
+
+app.use("/api", userRoutes);
+
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}!`));

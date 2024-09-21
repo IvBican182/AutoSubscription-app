@@ -9,7 +9,9 @@ const pool = new Pool({
     password: process.env.PASSWORD,
     host: process.env.HOST,
     port: process.env.DBPORT,
-    database: "AutoSubscription"
+    database: "AutoSubscription",
+    secretOrPrivateKey: process.env.JWT_KEY
+
 })
 
 module.exports = pool;
