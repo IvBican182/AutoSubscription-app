@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { fetchUsers } from "../Redux/userSlice";
 import { RootState } from "../Redux/store";
 import { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap"
+import style from "./AdminHomepage.module.css";
 
 export default function AdminHomepage() {
     const dispatch = useAppDispatch();
@@ -19,26 +21,55 @@ export default function AdminHomepage() {
     }, []);
 
     return(
-        <div className="container">
-        <div className="total-budget">
-            <div className="sum">
-                <span>Amount of money from transactions</span>
-                <button>Transaction details</button> 
-            </div>
-        </div>
-        <div>
-            <button>Create new subscription</button>
-        </div>
-        <div>
-            <button>View current subscriptions</button>
-        </div>
-        <div>
-            {/* <p>users:</p>
-            <ul>{users.map((user: any) => {
-            return <li key={user.id}>{user.first_name}</li>
-             })}
-            </ul> */}
-        </div>
-        </div>
+        <Container className={style.userContainer}>
+            <Row className={style.row}>
+                
+                <Col className="col-md-4">
+                    <div className={style.card}>
+                        <div className="card-body">
+                            <h5 className="card-title">TRAINING</h5>
+                            <p>Set training for your team</p>
+                            <p className="card-text">see the details</p>
+                            <a href="#" className="btn btn-primary">SEE MORE</a>
+                        </div>
+                    </div>
+                </Col>
+                
+                <Col className="col-md-4">
+                    <div className={style.card}>
+                        <div className="card-body">
+                            <h5 className="card-title">PROFILE</h5>
+                            <p>coach name</p>
+                            <p>player email</p>
+                            <p>group</p>
+                            <p className="card-text">view and edit your profile details</p>
+                            <a href="#" className="btn btn-primary">SEE MORE</a>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+
+            <Row className={style.row}>   
+                <Col className="col-md-4">
+                    <div className={style.card}>
+                        <div className="card-body">
+                            <h5 className="card-title">NEWS FEED</h5>
+                            <p className="card-text">Write news for your team group</p>
+                            <a href="#" className="btn btn-primary">GO</a>
+                        </div>
+                    </div>
+                </Col>
+                
+                <Col className="col-md-4">
+                    <div className={style.card}>
+                        <div className="card-body">
+                            <h5 className="card-title">TOTAL BUDGET</h5>
+                            <p className="card-text">VIEW SUBSCRIPTION DETAILS</p>
+                            <a href="#" className="btn btn-primary">VIEW DETAILS</a>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }

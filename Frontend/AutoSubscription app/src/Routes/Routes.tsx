@@ -5,6 +5,7 @@ import GroupsPage from "../Pages/GroupsPage";
 import App from "../App";
 import SignUp from "../Pages/SignUp";
 import Login from "../Pages/Login";
+import Welcome from "../components/Welcome";
 
 
 
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
+            { path: "", element: <Welcome /> },
             { path: "/home", element: <Homepage /> },
             { path: "/groups", element: <GroupsPage /> },
             { path: "/login", element: <Login /> },

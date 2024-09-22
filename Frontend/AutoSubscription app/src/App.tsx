@@ -7,9 +7,11 @@ function App() {
 
 
   return (
-    <section className="container">
+    <section className="main-container">
       <Navbar />
+      <div className="outlet-container">
         <Outlet />
+      </div>
       <Footer />
     </section>
   )

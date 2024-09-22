@@ -23,15 +23,15 @@ export default function Navbar() {
                 {isToken && (
                         <>
                             <li className="nav-link">
-                                <NavLink to ="/home" className="nav-link"><span className={style.latoBold}>home</span></NavLink>
+                                <NavLink to ="/home" className="nav-link"><span className={style.latoBold}>HOME</span></NavLink>
                             </li>
                             {/* Groups Link - Visible only when logged in */}
                             <li className="nav-link">
-                                <NavLink to="/groups" className="nav-link"><span className={style.latoBold}>groups</span></NavLink>
+                                <NavLink to="/groups" className="nav-link"><span className={style.latoBold}>GROUPS</span></NavLink>
                             </li>
                             {/* Sign Out Link - Visible only when logged in */}
                             <li className="nav-link">
-                                <NavLink to="/login" className="nav-link"><button onClick={() => dispatch(logout())} className={style.logoutButton}>sign out</button></NavLink>
+                                <NavLink to="/login" className="nav-link"><button onClick={() => dispatch(logout())} className={style.logoutButton}>SIGN OUT</button></NavLink>
                             </li>
                         </>
                     )}
@@ -40,10 +40,10 @@ export default function Navbar() {
                     {!isToken && (
                         <div className={style.navAuth}>
                             <li className="nav-link">
-                                <NavLink to="/login" className="nav-link"><span className={style.latoBold}>sign in</span></NavLink>
+                                <NavLink to="/login" className="nav-link"><span className={style.latoBold}>SIGN IN</span></NavLink>
                             </li>
                             <li className="nav-link">
-                                <NavLink to="/signUp" className="nav-link"><span className={style.latoBold}>sign up</span></NavLink>
+                                <NavLink to="/signUp" className="nav-link"><span className={style.latoBold}>SIGN UP</span></NavLink>
                             </li>
                         </div>
                     )}
