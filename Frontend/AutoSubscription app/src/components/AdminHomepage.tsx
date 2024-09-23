@@ -5,9 +5,11 @@ import { RootState } from "../Redux/store";
 import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap"
 import style from "./AdminHomepage.module.css";
+import { useNavigate } from "react-router";
 
 export default function AdminHomepage() {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const users = useSelector((state: RootState) => state.users.users )
     
@@ -43,7 +45,7 @@ export default function AdminHomepage() {
                             <p>player email</p>
                             <p>group</p>
                             <p className="card-text">view and edit your profile details</p>
-                            <a href="#" className="btn btn-primary">SEE MORE</a>
+                            <button className="btn btn-primary" onClick={()=> navigate("/profile")}>SEE MORE</button>
                         </div>
                     </div>
                 </Col>

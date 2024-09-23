@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { fetchUsers } = require("../controllers/userController");
+const { fetchUsers, fetchSingleUser, updateUser } = require("../controllers/userController");
 
 router.get('/users', fetchUsers);
+router.get('/profile/:id', fetchSingleUser);
+router.put('/profile/update/:id', updateUser);
 
 module.exports = router;

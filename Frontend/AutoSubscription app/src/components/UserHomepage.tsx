@@ -1,7 +1,26 @@
 import { Container, Row, Col } from "react-bootstrap"
 import style from "./UserHomepage.module.css";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
+import UserData from "./UserData";
 
 export default function UserHomepage() {
+
+    const user = useSelector((state: RootState) => state.auth.user);
+
+    console.log(user);
+
+
+    const id = user.map((u:any) => (u.id));
+
+    const userId = id[0];
+
+
+    const navigate = useNavigate();
+
+
+
     return(
         <Container className={style.userContainer}>
             <Row className={style.row}>
@@ -21,11 +40,15 @@ export default function UserHomepage() {
                     <div className={style.card}>
                         <div className="card-body">
                             <h5 className="card-title">PROFILE</h5>
-                            <p>player name</p>
-                            <p>player email</p>
-                            <p>group</p>
+                            <div>
+                                <div>{user.map((u: any) => {
+                                    return (
+                                        <UserData key={u.id} props={u}/>
+                                    )
+                                })}</div>
+                            </div>
                             <p className="card-text">view and edit your profile details</p>
-                            <a href="#" className="btn btn-primary">SEE MORE</a>
+                            <button className="btn btn-primary" onClick={()=> navigate(`/profile/${userId}`)}>SEE MORE</button>
                         </div>
                     </div>
                 </Col>

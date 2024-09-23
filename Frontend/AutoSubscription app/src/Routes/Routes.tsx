@@ -6,6 +6,7 @@ import App from "../App";
 import SignUp from "../Pages/SignUp";
 import Login from "../Pages/Login";
 import Welcome from "../components/Welcome";
+import UserProfile from "../Pages/UserProfile";
 
 
 
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
             { path: "/groups", element: <GroupsPage /> },
             { path: "/login", element: <Login /> },
             { path: "/signUp", element: <SignUp /> },
+            { path: "/profile/:id", element: <UserProfile /> },
             
             
         ]
