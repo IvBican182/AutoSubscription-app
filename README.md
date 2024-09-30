@@ -5,6 +5,12 @@
 Web app which automates subscriptions for football clubs. It allows team leaders to form groups of players and manage their
 team training tactics. Team leaders can also direct their teams with instructions through a posting/commenting system.
 
+* app showcase
+
+<img src="./assets/autoSubscription1.PNG" alt="homepage">
+
+<img src="./assets/autoSubscription2.PNG" alt="sign up page">
+
 ## Requirements
 
 * Node v16.7.0
