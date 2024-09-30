@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+//import our routes
 const authRoutes = require('./routes/authRoute.js');
 const userRoutes = require("./routes/userRoute.js");
 
@@ -16,6 +17,7 @@ const pool = require("./db.js");
 app.use(bodyParser.json());
 app.use(cors());
 
+//testing to see if our setup works
 app.get("/juniors", async (req,res) => {
     try {
         const groups = await pool.query('SELECT * FROM groups');
@@ -27,6 +29,8 @@ app.get("/juniors", async (req,res) => {
         res.status(500).json({ error: "Failed to fetch groups" });
     }
 });
+
+//using our routes
 
 app.use("/api", authRoutes);
 
