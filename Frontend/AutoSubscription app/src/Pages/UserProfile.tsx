@@ -3,15 +3,19 @@ import { useAppDispatch } from "../Redux/store";
 import style from "./UserProfile.module.css";
 import { useEffect, useState } from "react";
 import { RootState } from "../Redux/store";
-import { changeUserData, fetchSingleUser } from "../Redux/userSlice";
+import { fetchSingleUser } from "../Redux/userSlice";
 import UserData from "../components/UserData";
+import { updateUserData } from "../Redux/authSlice";
 
 export default function UserProfile() {
     const dispatch = useAppDispatch();
 
     const user = useSelector((state: RootState) => state.auth.user);
+    const token = useSelector((state: RootState) => state.auth.token);
 
-    const id = user.map((u:any) => (u.id));
+    const userArray = [user];
+
+    const id = userArray.map((u:any) => (u.id));
 
     const userId = id[0]
 
@@ -44,7 +48,7 @@ export default function UserProfile() {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        dispatch(changeUserData({ userId: userId, formData: formData }));
+        dispatch(updateUserData({ userId: userId, formData: formData, token: token }));
 
         setFormData({
             first_name: "",
@@ -58,7 +62,7 @@ export default function UserProfile() {
         <div>
             <div>
                 <h1>PROFILE</h1>
-                <ul>{user.map((u:any) => {
+                <ul>{userArray.map((u:any) => {
                     return (
                         <UserData key={u.id} props={u}/>
                     )

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import style from "./SignUp.module.css"
 
 
+
 export default function SignUp() {
 
     const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ export default function SignUp() {
         role_id: 2,
         
     });
+
+    
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData((preValue) => {
@@ -41,11 +44,12 @@ export default function SignUp() {
         
       };
 
+
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(userSignUp(parsedFormData));
         navigate('/home');
-        console.log(formData); 
+        console.log(parsedFormData); 
     };
 
 

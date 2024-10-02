@@ -18,13 +18,6 @@ const initialState : userState = {
 };
 
 
-interface AuthResponse {
-    user: any;
-    
-}
-// interface ErrorPayload {
-//     message: string;
-// }
 
 export const fetchUsers = createAsyncThunk<User[]>("api/users", async() => {
     const response = await fetch("http://localhost:3050/api/users");
@@ -43,23 +36,7 @@ export const fetchSingleUser = createAsyncThunk<any, number>("api/singleUser", a
 
 });
 
-export const changeUserData = createAsyncThunk<any,{ userId: any; formData: any }>("api/changeUserData", async({ userId, formData }) => {
-    try {
-        const response = await fetch(`http://localhost:3050/api/profile/update/${userId}`, {
-            method: "PUT",
-            headers: { "Content-Type" : "application/json" },
-            body: JSON.stringify(formData)
-        });
-        const userData = await response.json();
-        console.log(userData);
-        return userData;
-    }
-    catch (error){
-        throw new Error("failed to change data");
 
-    }
-    
-})
 
 export const userSlice = createSlice({
     name: "users",
@@ -73,11 +50,8 @@ export const userSlice = createSlice({
         .addCase(fetchSingleUser.fulfilled, (state, action) => {
             state.user = action.payload
         })
-        .addCase(changeUserData.fulfilled, (state, action) => {
-            state.user = action.payload.user
-        })
+        
     }
-
 });
 
 export default userSlice.reducer;

@@ -38,6 +38,7 @@ export const userSignUp = createAsyncThunk<AuthResponse, SignUpFormData>("auth/s
        });
    
        const data = await response.json();
+       console.log(data);
        return data;
     } 
     catch (error){
@@ -45,7 +46,7 @@ export const userSignUp = createAsyncThunk<AuthResponse, SignUpFormData>("auth/s
     }
 });
 
-export const userLogin = createAsyncThunk<AuthResponse, any>("auth/login", async(formData,thunkAPI) => {
+export const userLogin = createAsyncThunk<AuthResponse, LoginFormData>("auth/login", async(formData,thunkAPI) => {
     try {
         const response = await fetch("http://localhost:3050/api/login", {
             method: "POST",
@@ -60,6 +61,35 @@ export const userLogin = createAsyncThunk<AuthResponse, any>("auth/login", async
     catch (error){
         return thunkAPI.rejectWithValue(error);
     }
+});
+
+export const updateUserData = createAsyncThunk<any,{ userId: number; formData: any, token: any }>("api/changeUserData", async({ userId, formData, token }) => {
+
+    try {
+
+        const response = await fetch(`http://localhost:3050/api/profile/update/${userId}`, {
+            method: "PUT",
+            headers: { 
+                "Content-Type" : "application/json",
+                "Authorization": `Bearer ${token}` 
+            },
+            body: JSON.stringify(formData)
+        });
+        console.log(`Token: ${token}`)
+
+        if (!response.ok) {
+            throw new Error('Failed to update user data');
+        }
+
+        const userData = await response.json();
+        console.log(userData);
+        return userData;
+    }
+    catch (error){
+        throw new Error("failed to change data");
+
+    }
+    
 });
 
 export const authSlice = createSlice({
@@ -91,6 +121,10 @@ export const authSlice = createSlice({
             state.token = action.payload.token
             state.user = action.payload.user
 
+        })
+        .addCase(updateUserData.fulfilled, (state, action: PayloadAction<{ user: any, token: string }>) => {
+            state.user = action.payload.user
+            
         })
     },
 

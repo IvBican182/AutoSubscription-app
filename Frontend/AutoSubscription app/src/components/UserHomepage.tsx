@@ -9,12 +9,16 @@ export default function UserHomepage() {
 
     const user = useSelector((state: RootState) => state.auth.user);
 
-    console.log(user);
+    const userArray = [user];
+
+    const userId = userArray.map((u:any) => u.id )
+
+    console.log(`userHomepage ${JSON.stringify(userArray)}`);
+
+    
 
 
-    const id = user.map((u:any) => (u.id));
-
-    const userId = id[0];
+    
 
 
     const navigate = useNavigate();
@@ -41,11 +45,10 @@ export default function UserHomepage() {
                         <div className="card-body">
                             <h5 className="card-title">PROFILE</h5>
                             <div>
-                                <div>{user.map((u: any) => {
-                                    return (
-                                        <UserData key={u.id} props={u}/>
-                                    )
-                                })}</div>
+                                <div> {userArray.map((user:any) => {
+                                    return <UserData key={user.id} props={user}/>
+                                })}
+                                </div>
                             </div>
                             <p className="card-text">view and edit your profile details</p>
                             <button className="btn btn-primary" onClick={()=> navigate(`/profile/${userId}`)}>SEE MORE</button>
