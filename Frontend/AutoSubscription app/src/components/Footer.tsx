@@ -1,6 +1,7 @@
 import git_logo from "../assets/git-logo.png";
 import styles from "./Footer.module.css";
 
+//footer component with my details
 export default function Footer() {
     return (
         <div className={styles.footer}>

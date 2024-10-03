@@ -5,9 +5,10 @@ import { RootState } from "../Redux/store";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/authSlice";
 
-
+//navbar component, this will always be present on the page
 export default function Navbar() {
     const dispatch = useDispatch();
+    //getting our token from state, if no token we will not show page links, only "sign in" and "login"
     const isToken = useSelector((state: RootState) => state.auth.token);
 
     return (
@@ -20,6 +21,7 @@ export default function Navbar() {
         
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
+                {/* if authenticated, show homepage, group route, sign out */}
                 {isToken && (
                         <>
                             <li className="nav-link">
@@ -31,12 +33,13 @@ export default function Navbar() {
                             </li>
                             {/* Sign Out Link - Visible only when logged in */}
                             <li className="nav-link">
+                                {/*navigate to login page after logout */}
                                 <NavLink to="/login" className="nav-link"><button onClick={() => dispatch(logout())} className={style.logoutButton}>SIGN OUT</button></NavLink>
                             </li>
                         </>
                     )}
 
-                    {/* Sign In Link - Visible only when not logged in */}
+                    {/* if not authenticated, show only "sign-in" and "sign-out routes"*/}
                     {!isToken && (
                         <div className={style.navAuth}>
                             <li className="nav-link">

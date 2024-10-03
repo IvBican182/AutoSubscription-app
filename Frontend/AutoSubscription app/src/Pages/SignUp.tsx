@@ -7,13 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import style from "./SignUp.module.css"
 
 
-
+//page for signin in the user
 export default function SignUp() {
 
+    //enables the usage of dispatch
     const dispatch = useAppDispatch();
-
+    
+    //enables navigating to another route
     const navigate = useNavigate();
 
+    //our form data state, we will ask the user to enter these values
     const [formData, setFormData] = useState<SignUpFormData>({
         first_name: '',
         last_name: '',
@@ -25,7 +28,7 @@ export default function SignUp() {
     });
 
     
-
+    //updating user input state so that we see the changes
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData((preValue) => {
             return {
@@ -36,7 +39,8 @@ export default function SignUp() {
         });
 
     };
-
+    
+    //parsing user input from string to number and spreading the rest of the user object
     const parsedFormData = {
         ...formData,
         user_age: Number(formData.user_age),
@@ -44,10 +48,12 @@ export default function SignUp() {
         
       };
 
-
+    //submit our form
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
+        //dispatch our signUp thunk, sends parsed data to our backend API
         dispatch(userSignUp(parsedFormData));
+        //navigates the user to homepage
         navigate('/home');
         console.log(parsedFormData); 
     };

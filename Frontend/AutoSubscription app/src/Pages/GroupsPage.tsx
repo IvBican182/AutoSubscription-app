@@ -1,5 +1,7 @@
-function GroupsPage() {
-
+//still in progress, need to add the logic for adding users to groups
+//this is a dummy example
+export default function GroupsPage() {
+    
 
     return (
     <div className="container">
@@ -83,4 +85,3 @@ function GroupsPage() {
     )
   }
   
-  export default GroupsPage;

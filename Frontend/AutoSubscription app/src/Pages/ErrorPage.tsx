@@ -1,5 +1,5 @@
 
-
+//this is current error page, needs updating in the future
 export default function ErrorPage() {
     return (
         <>

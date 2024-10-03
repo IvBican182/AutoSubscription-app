@@ -13,17 +13,13 @@ export interface SignUpFormData {
     
 }
 
-export interface FormData {
-    formData: SignUpFormData[]; // This allows formData to be an array of User objects
-  }
-
 //Login Interface
-
 export interface LoginFormData {
     user_email: string;
     hashed_password: string;
 }
 
+//user data interface
 export interface User {
     id: number,
     first_name: string,

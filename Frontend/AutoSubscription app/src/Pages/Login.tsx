@@ -7,16 +7,20 @@ import { userLogin } from "../Redux/authSlice";
 import style from "./Login.module.css";
 
 export default function Login() {
-
+    
+    //enables the usage of dispatch
     const dispatch = useAppDispatch();
+
+    //enables navigating to another route
     const navigate = useNavigate();
 
-
+    //our form data state, we will ask the user to enter these values
     const [loginData, setLoginData] = useState({
         user_email: "",
         hashed_password: ""
     });
-
+    
+    //updating user input state so that we see the changes
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setLoginData((preValue) => {
             return {
@@ -28,9 +32,12 @@ export default function Login() {
 
     };
 
+    //submit our form
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
+        //dispatch our login thunk, sends data to our backend API
         dispatch(userLogin(loginData));
+        //navigates the user to homepage
         navigate('/home');
         console.log(loginData); 
     };

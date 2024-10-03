@@ -7,16 +7,24 @@ import { Container, Row, Col } from "react-bootstrap"
 import style from "./AdminHomepage.module.css";
 import { useNavigate } from "react-router";
 
+//our admin homepage, users won't see this page
 export default function AdminHomepage() {
+
+    //enables the usage of dispatch
     const dispatch = useAppDispatch();
+
+    //enables navigating to another route
     const navigate = useNavigate();
 
+    //get users from our state
     const users = useSelector((state: RootState) => state.users.users )
     
+    //function to fetch our users
     function fetch() {
         dispatch(fetchUsers());
     }
-
+    
+    //we use it in useEffect so that our users are fetched again upon changes in database
     useEffect(() => {
         fetch();
         console.log(users);
@@ -45,6 +53,7 @@ export default function AdminHomepage() {
                             <p>player email</p>
                             <p>group</p>
                             <p className="card-text">view and edit your profile details</p>
+                            {/*navigate to profile page, still needs work */}
                             <button className="btn btn-primary" onClick={()=> navigate("/profile")}>SEE MORE</button>
                         </div>
                     </div>

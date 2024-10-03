@@ -1,6 +1,7 @@
 import style from "./Welcome.module.css";
 import running from "../assets/running.png";
 
+//welcome component, renders at the start of application
 export default function Welcome() {
     return(
         <div className={style.welcomeContainer}>

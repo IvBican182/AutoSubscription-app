@@ -1,5 +1,5 @@
 
-
+//showing user data
 const UserData: React.FC<any> = ({ props }) => {
     return (
         <div>
@@ -9,7 +9,7 @@ const UserData: React.FC<any> = ({ props }) => {
             <li>{props.user_age}</li>
             
         </div>
-    ) // Access props here
+    ) 
   };
 
   export default UserData;

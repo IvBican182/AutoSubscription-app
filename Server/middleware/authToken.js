@@ -4,29 +4,29 @@ require("dotenv").config({
 });
 
 const verifyToken = (req, res, next) => {
-  // Extract the token from the Authorization header
+  //extracting the token from the header
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Bearer token format
 
   if (token == null) {
-    // No token found in the request
+    //if no token found in the request send an error
     return res.status(401).json({ message: 'Token is required' });
   }
 
-  // Log the token to debug
+  //logs the token to make sure we get it
   console.log("Token received:", token);
 
-  // Verify the token
+  //verify the received token 
   jwt.verify(token, process.env.JWT_KEY, (err, user) => {
     if (err) {
-      // Invalid or expired token
+      //if token is invalid or expired send and error
       return res.status(403).json({ message: 'Invalid token' });
     }
 
-    // Token is valid, store the decoded user data in request for later use
+    //if token is valid, store the user data in request 
     req.user = user;
 
-    // Call the next middleware or route handler
+    //call the next middleware 
     next();
   });
 };

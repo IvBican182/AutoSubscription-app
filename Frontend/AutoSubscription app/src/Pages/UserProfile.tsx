@@ -7,21 +7,28 @@ import { fetchSingleUser } from "../Redux/userSlice";
 import UserData from "../components/UserData";
 import { updateUserData } from "../Redux/authSlice";
 
+//User profile page
 export default function UserProfile() {
+
+    //enables the usage of dispatch
     const dispatch = useAppDispatch();
 
+    //extract authenticated user and his token
     const user = useSelector((state: RootState) => state.auth.user);
     const token = useSelector((state: RootState) => state.auth.token);
 
+    //convert user object to array for mapping purposes
     const userArray = [user];
 
+    //get the current user ID, we want to use it later for fetching current user data
     const id = userArray.map((u:any) => (u.id));
 
+    //setting user Id
     const userId = id[0]
 
     console.log(userId);
 
-
+    //form data which user should provide for updating
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
@@ -29,13 +36,13 @@ export default function UserProfile() {
         hashed_password: ""
     });
 
-    
+    //we use useEffect for our async thunk, fetching userData by his ID
     useEffect(() => {
         dispatch(fetchSingleUser(userId));
         console.log(user);
     }, [])
 
-
+    //updating user input state so that we see the changes
     function handleChange(e: any) {
         e.preventDefault();
         setFormData((prevValue) => {
@@ -45,9 +52,13 @@ export default function UserProfile() {
             }
         })
     };
-
+    
+    //submit new user changes
     function handleSubmit(e: any) {
         e.preventDefault();
+        //we need to send current user ID (so that backend knows which user we need to update)
+        //we send new form data our user entered
+        //we send the current user token for authentication and protection
         dispatch(updateUserData({ userId: userId, formData: formData, token: token }));
 
         setFormData({
@@ -62,6 +73,7 @@ export default function UserProfile() {
         <div>
             <div>
                 <h1>PROFILE</h1>
+                {/* we map the user array to send user data to another component */}
                 <ul>{userArray.map((u:any) => {
                     return (
                         <UserData key={u.id} props={u}/>
